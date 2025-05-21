@@ -51,15 +51,6 @@ chmod o-rwx myfile.txt
 ```
 
 
-###  Summary of Permission Numbers
-
-| Symbol | Meaning | Binary | Octal |
-| ------ | ------- | ------ | ----- |
-| `r`    | Read    | 100    | 4     |
-| `w`    | Write   | 010    | 2     |
-| `x`    | Execute | 001    | 1     |
-| `-`    | None    | 000    | 0     |
-
 
 
 ![Screenshot](Screenshorts/Screenshot%202025-05-20%20232612.png)
