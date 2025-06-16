@@ -3,7 +3,7 @@
 
 ---
 
-## 1. Introduction to containerization and Docker fundamentals, Basic Commands
+# **Introduction to containerization and Docker fundamentals, Basic Commands**
 
 #### What is Containerization?
 
