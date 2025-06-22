@@ -1,9 +1,14 @@
 
-Here is a **step-by-step guide** to create a **Kubernetes cluster using Minikube** on an **Azure Virtual Machine (VM)**. This is helpful when you want a lightweight Kubernetes cluster for development or testing purposes on Azure cloud.
+# **Week -5 {Assignment}**
 
----
 
-## ✅ Overview
+-------------------------------------------------
+## 1. Create a Kubernetes cluster using minikube
+-------------------------------------------------
+
+
+
+### Overview
 
 Minikube runs a **single-node Kubernetes cluster** on a VM. We’ll do the following:
 
@@ -15,11 +20,11 @@ Minikube runs a **single-node Kubernetes cluster** on a VM. We’ll do the follo
 
 ---
 
-## 🚀 Step-by-Step Guide
+### Step-by-Step Guide
 
 ---
 
-### 🔹 **STEP 1: Create Ubuntu VM in Azure**
+#### **STEP 1: Create Ubuntu VM in Azure**
 
 1. Go to [Azure Portal](https://portal.azure.com)
 2. Click **“Virtual Machines” → “Create”**
@@ -33,7 +38,7 @@ Minikube runs a **single-node Kubernetes cluster** on a VM. We’ll do the follo
 
 ---
 
-### 🔹 **STEP 2: Connect to the VM**
+#### **STEP 2: Connect to the VM**
 
 On your local machine, connect using SSH:
 
@@ -43,7 +48,7 @@ ssh azureuser@<your-vm-public-ip>
 
 ---
 
-### 🔹 **STEP 3: Install Docker**
+#### **STEP 3: Install Docker**
 
 Minikube requires a container runtime like Docker.
 
@@ -59,7 +64,7 @@ sudo usermod -aG docker $USER
 
 ---
 
-### 🔹 **STEP 4: Install kubectl**
+#### **STEP 4: Install kubectl**
 
 ```bash
 curl -LO "https://dl.k8s.io/release/$(curl -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
@@ -70,7 +75,7 @@ kubectl version --client
 
 ---
 
-### 🔹 **STEP 5: Install Minikube**
+#### **STEP 5: Install Minikube**
 
 ```bash
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
@@ -80,7 +85,7 @@ minikube version
 
 ---
 
-### 🔹 **STEP 6: Start Minikube**
+#### **STEP 6: Start Minikube**
 
 Now start Minikube with Docker driver:
 
@@ -88,13 +93,13 @@ Now start Minikube with Docker driver:
 minikube start --driver=docker
 ```
 
-📌 If Docker is not running or facing issues, you can use `--driver=none` as fallback:
+ If Docker is not running or facing issues, you can use `--driver=none` as fallback:
 
 ```bash
 minikube start --driver=none
 ```
 
-> ⚠️ Ensure swap is disabled for the `--driver=none` method:
+>  Ensure swap is disabled for the `--driver=none` method:
 
 ```bash
 sudo swapoff -a
@@ -102,7 +107,7 @@ sudo swapoff -a
 
 ---
 
-### 🔹 **STEP 7: Verify Kubernetes Cluster**
+#### **STEP 7: Verify Kubernetes Cluster**
 
 Check if the cluster is up:
 
@@ -115,7 +120,7 @@ You should see one node (your VM) in `Ready` state.
 
 ---
 
-### 🔹 **STEP 8 (Optional): Enable Kubernetes Dashboard**
+#### **STEP 8 (Optional): Enable Kubernetes Dashboard**
 
 ```bash
 minikube dashboard
@@ -136,46 +141,17 @@ http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/http:kuber
 ```
 
 ---
+----------------------------------------------------------------------------------------------
 
-## 🧼 Cleanup (Optional)
 
-To stop and delete Minikube:
+------------------------------------------------
+# 2. Create a Kubernetes cluster using kubeadm
+--------------------------------------------------
 
-```bash
-minikube stop
-minikube delete
-```
 
 ---
 
-## ✅ Summary
-
-| Task             | Command                          |
-| ---------------- | -------------------------------- |
-| Install Docker   | `sudo apt install docker.io`     |
-| Install kubectl  | `curl -LO ...`                   |
-| Install Minikube | `curl -LO ...`                   |
-| Start Minikube   | `minikube start --driver=docker` |
-| Check cluster    | `kubectl get nodes`              |
-| Launch Dashboard | `minikube dashboard`             |
-
----
-
-Would you like me to generate screenshots or create a Markdown/PDF version of this guide?
-
-\
-
-
-
-
-
-
-
-Creating a **Kubernetes cluster using `kubeadm`** is a more **manual and production-like** approach than using Minikube. This guide will walk you through setting up a multi-node Kubernetes cluster (1 master + 1 or more worker nodes) on **Azure VMs**.
-
----
-
-## ✅ Overview of Tasks
+### Overview of Tasks
 
 1. Create 2 or more Azure Ubuntu VMs (1 master, 1+ workers)
 2. Set up hostnames and networking
@@ -188,9 +164,9 @@ Creating a **Kubernetes cluster using `kubeadm`** is a more **manual and product
 
 ---
 
-## 🚀 Step-by-Step Guide
+### Step-by-Step Guide
 
-### 🔹 STEP 1: Provision Azure Ubuntu VMs
+#### STEP 1: Provision Azure Ubuntu VMs
 
 Create **at least 2 Ubuntu VMs** using Azure Portal or CLI.
 
@@ -198,7 +174,7 @@ Create **at least 2 Ubuntu VMs** using Azure Portal or CLI.
 * VM2: `k8s-worker1`
 * VM3: `k8s-worker2` *(optional)*
 
-> ✅ **Ports to open** on all VMs:
+>  **Ports to open** on all VMs:
 
 * 22 (SSH)
 * 6443 (Kubernetes API server)
@@ -208,7 +184,7 @@ Create **at least 2 Ubuntu VMs** using Azure Portal or CLI.
 
 ---
 
-### 🔹 STEP 2: Set Hostnames and Add to `/etc/hosts`
+#### STEP 2: Set Hostnames and Add to `/etc/hosts`
 
 #### On all VMs:
 
@@ -232,7 +208,7 @@ Example:
 
 ---
 
-### 🔹 STEP 3: Disable Swap
+#### STEP 3: Disable Swap
 
 ```bash
 sudo swapoff -a
@@ -241,7 +217,7 @@ sudo sed -i '/ swap / s/^/#/' /etc/fstab
 
 ---
 
-### 🔹 STEP 4: Install Container Runtime (containerd recommended)
+#### STEP 4: Install Container Runtime (containerd recommended)
 
 ```bash
 sudo apt update
@@ -254,7 +230,7 @@ sudo systemctl enable containerd
 
 ---
 
-### 🔹 STEP 5: Install `kubeadm`, `kubelet`, and `kubectl`
+#### STEP 5: Install `kubeadm`, `kubelet`, and `kubectl`
 
 ```bash
 sudo apt update && sudo apt install -y apt-transport-https ca-certificates curl
@@ -271,7 +247,7 @@ sudo apt-mark hold kubelet kubeadm kubectl
 
 ---
 
-### 🔹 STEP 6: Initialize Control Plane (Master Node)
+#### STEP 6: Initialize Control Plane (Master Node)
 
 Only on `k8s-master`:
 
@@ -291,7 +267,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 ---
 
-### 🔹 STEP 7: Install Pod Network (e.g., Calico or Flannel)
+#### STEP 7: Install Pod Network (e.g., Calico or Flannel)
 
 #### Example using Calico:
 
@@ -307,7 +283,7 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documen
 
 ---
 
-### 🔹 STEP 8: Join Worker Nodes to Cluster
+#### STEP 8: Join Worker Nodes to Cluster
 
 Run this on each worker node (`k8s-worker1`, etc.), using the token generated in Step 6:
 
@@ -318,7 +294,7 @@ sudo kubeadm join <MASTER_PRIVATE_IP>:6443 --token <token> \
 
 ---
 
-### 🔹 STEP 9: Verify the Cluster
+#### STEP 9: Verify the Cluster
 
 Back on the master node:
 
@@ -331,42 +307,21 @@ You should see all nodes in `Ready` status and networking pods running.
 
 ---
 
-## ✅ Summary of Commands
 
-| Task               | Command                               |
-| ------------------ | ------------------------------------- |
-| Disable Swap       | `swapoff -a`                          |
-| Install containerd | `apt install containerd`              |
-| Install kube tools | `apt install kubeadm kubelet kubectl` |
-| Init master        | `kubeadm init --pod-network-cidr=...` |
-| Join worker        | `kubeadm join ...`                    |
-| Install Calico     | `kubectl apply -f calico.yaml`        |
+------------------------------------------------------------------------------------------------------
+# 3. Deploy an AKS cluster using the portal. Access the dashboard and create roles for multiple users
+---------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
 
 ---
 
-## 📦 Optional: Save All Steps in a Script?
-
-Would you like this entire setup as a shell script or cloud-init for automation?
-
-Or a version in Markdown/PDF with diagrams?
-
-Let me know how you plan to document it.
-
-
-
-
-
-
-
-
-
-
-
-Here is a **step-by-step guide** to deploy an **AKS (Azure Kubernetes Service) cluster using the Azure Portal**, **access the Kubernetes dashboard**, and **create RBAC roles for multiple users**.
-
----
-
-## ✅ Overview
+### Overview
 
 1. Deploy AKS cluster via Azure Portal
 2. Connect to the cluster using Cloud Shell or local machine
@@ -376,11 +331,11 @@ Here is a **step-by-step guide** to deploy an **AKS (Azure Kubernetes Service) c
 
 ---
 
-## 🚀 STEP-BY-STEP GUIDE
+### STEP-BY-STEP GUIDE
 
 ---
 
-### 🔹 STEP 1: Deploy AKS Cluster via Azure Portal
+#### STEP 1: Deploy AKS Cluster via Azure Portal
 
 1. Go to [Azure Portal](https://portal.azure.com)
 2. Search for **“Kubernetes services”** → Click **“Create”**
@@ -410,11 +365,11 @@ Here is a **step-by-step guide** to deploy an **AKS (Azure Kubernetes Service) c
 
    * Click **Create**
 
-> ☁️ It will take \~5–10 minutes to create the AKS cluster.
+>  It will take \~5–10 minutes to create the AKS cluster.
 
 ---
 
-### 🔹 STEP 2: Connect to AKS Cluster
+#### STEP 2: Connect to AKS Cluster
 
 After the cluster is created:
 
@@ -436,7 +391,7 @@ kubectl get nodes
 
 ---
 
-### 🔹 STEP 3: Enable and Access Kubernetes Dashboard
+#### STEP 3: Enable and Access Kubernetes Dashboard
 
 1. Enable the dashboard:
 
@@ -471,15 +426,15 @@ kubectl proxy
 http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
 ```
 
-> 📝 Paste the token to log in.
+> Paste the token to log in.
 
 ---
 
-### 🔹 STEP 4: Create RBAC Roles for Multiple Users
+#### STEP 4: Create RBAC Roles for Multiple Users
 
 You can create roles and role bindings to define access for users/groups.
 
-#### Example: Create a Role to Read Pods in a Namespace
+##### Example: Create a Role to Read Pods in a Namespace
 
 ```yaml
 # role.yaml
@@ -518,49 +473,17 @@ kubectl apply -f role.yaml
 kubectl apply -f rolebinding.yaml
 ```
 
----
+-----------------------
 
-### 🔹 STEP 5 (Optional): Azure AD Role Assignment for AKS
-
-If you enabled **Azure AD Integration**, you can:
-
-1. Go to **Azure Active Directory > Enterprise Applications**
-2. Find your AKS cluster name (e.g., `aks-<clustername>-...`)
-3. Go to **Users and Groups** → **Add user**
-4. Assign Azure AD users/groups and select role (e.g., Reader, Contributor)
-
-Ensure Azure RBAC for Kubernetes authorization is enabled to enforce this.
-
----
-
-## ✅ Summary
-
-| Task             | Description                          |
-| ---------------- | ------------------------------------ |
-| Deploy AKS       | Azure Portal → Kubernetes Service    |
-| Connect          | `az aks get-credentials ...`         |
-| Enable Dashboard | `kubectl apply ...` + token          |
-| RBAC Roles       | `kubectl apply -f role.yaml`         |
-| AD Integration   | Use Azure AD users + Kubernetes RBAC |
-
----
-
-Would you like this exported as a Markdown or PDF file?
-Or a working example with YAML files and test user permissions?
+---------------------------------------------------------------------------------------
+# 4. Deploy a microservice application on AKS cluster and access it using public internet
+-------------------------------------------------------------------------------------------
 
 
 
 
 
-
-
-
-
-Here's a **complete step-by-step guide** to **deploy a microservice application** on your **Azure Kubernetes Service (AKS)** cluster and **access it via the public internet**.
-
----
-
-## ✅ Overview
+### Overview
 
 We will:
 
@@ -570,31 +493,23 @@ We will:
 4. Expose it to the public internet using a LoadBalancer
 5. Test the app in your browser
 
----
 
-## 🧱 Prerequisites
 
-* AKS cluster is already deployed
-* `kubectl` and `az` CLI configured (`az aks get-credentials` already done)
-* Basic knowledge of YAML and Kubernetes objects
+### Step-by-Step Instructions
 
 ---
 
-## 🚀 Step-by-Step Instructions
-
----
-
-### 🔹 STEP 1: Create a Sample Microservice App (optional if you have your own image)
+#### STEP 1: Create a Sample Microservice App (optional if you have your own image)
 
 We’ll use a prebuilt Docker image (`k8s.gcr.io/echoserver:1.10`) that listens on port 8080 and echoes the request.
 
-> ✅ You can replace this with your own microservice's image (e.g., from Docker Hub or ACR).
+>  You can replace this with your own microservice's image (e.g., from Docker Hub or ACR).
 
 ---
 
-### 🔹 STEP 2: Create Deployment and Service YAML Files
+#### STEP 2: Create Deployment and Service YAML Files
 
-#### 📝 `deployment.yaml`
+##### `deployment.yaml`
 
 ```yaml
 apiVersion: apps/v1
@@ -618,7 +533,7 @@ spec:
         - containerPort: 8080
 ```
 
-#### 📝 `service.yaml`
+##### `service.yaml`
 
 ```yaml
 apiVersion: v1
@@ -637,7 +552,7 @@ spec:
 
 ---
 
-### 🔹 STEP 3: Deploy to AKS
+#### STEP 3: Deploy to AKS
 
 Run the following:
 
@@ -655,7 +570,7 @@ kubectl get svc
 
 ---
 
-### 🔹 STEP 4: Get the Public IP
+#### STEP 4: Get the Public IP
 
 Run:
 
@@ -674,7 +589,7 @@ echo-service    LoadBalancer   10.0.123.45    52.183.12.55    80:30987/TCP   1m
 
 ---
 
-### 🔹 STEP 5: Access Your Application
+#### STEP 5: Access Your Application
 
 Open your browser and go to:
 
@@ -686,64 +601,16 @@ You should see a page that echoes your request (if using echoserver).
 
 ---
 
-## ✅ Optional Enhancements
 
-* 🔐 **HTTPS**: Use Ingress Controller with TLS
-* 🧪 **Health Checks**: Add liveness and readiness probes
-* 🔁 **Auto-scaling**: Add HPA (Horizontal Pod Autoscaler)
-* 📦 **Custom App**: Replace `echoserver` with your actual container
+-------------------------------------
+# 5. Expose services in the cluster with node port, cluster IP, load balancer
+-------------------------------------
+
+
 
 ---
 
-## 📝 Example with Your Own App (Dockerized Flask App)
-
-If you have a Docker image like `myuser/flask-microservice:latest`, modify the deployment like this:
-
-```yaml
-containers:
-- name: flask-app
-  image: myuser/flask-microservice:latest
-  ports:
-  - containerPort: 5000
-```
-
-And update `targetPort: 5000` in the service.
-
----
-
-## ✅ Summary
-
-| Task                | Command/YAML           |
-| ------------------- | ---------------------- |
-| Create Deployment   | `deployment.yaml`      |
-| Create Service (LB) | `service.yaml`         |
-| Apply to AKS        | `kubectl apply -f ...` |
-| Get Public IP       | `kubectl get svc`      |
-| Access App          | `http://<EXTERNAL-IP>` |
-
----
-
-Would you like this example exported as a working GitHub repo, or would you like to use your own app image?
-
-
-
-
-
-
-
-
-
-
-
-Here’s a **detailed step-by-step guide** to expose a service in your **AKS (Azure Kubernetes Service)** or **any Kubernetes cluster** using three service types:
-
-* **ClusterIP** (default, internal access only)
-* **NodePort** (exposes service on every node’s IP)
-* **LoadBalancer** (exposes via public IP — supported on cloud providers like Azure)
-
----
-
-## 🎯 Objective
+### Objective
 
 We'll deploy a sample app (like `nginx` or `echoserver`) and expose it using:
 
@@ -753,11 +620,11 @@ We'll deploy a sample app (like `nginx` or `echoserver`) and expose it using:
 
 ---
 
-## 🚀 Step-by-Step Instructions
+### Step-by-Step Instructions
 
 ---
 
-### 🔹 STEP 1: Deploy a Sample App
+#### STEP 1: Deploy a Sample App
 
 ```yaml
 # deployment.yaml
@@ -788,7 +655,7 @@ kubectl apply -f deployment.yaml
 
 ---
 
-### 🔹 STEP 2: Expose with `ClusterIP`
+#### STEP 2: Expose with `ClusterIP`
 
 ```yaml
 # clusterip-service.yaml
@@ -810,7 +677,7 @@ spec:
 kubectl apply -f clusterip-service.yaml
 ```
 
-📌 **Access:** Only accessible **inside the cluster**
+ **Access:** Only accessible **inside the cluster**
 Test with:
 
 ```bash
@@ -821,7 +688,7 @@ curl http://web-service-clusterip
 
 ---
 
-### 🔹 STEP 3: Expose with `NodePort`
+#### STEP 3: Expose with `NodePort`
 
 ```yaml
 # nodeport-service.yaml
@@ -843,7 +710,7 @@ spec:
 kubectl apply -f nodeport-service.yaml
 ```
 
-📌 **Access:**
+ **Access:**
 
 * On AKS: Run `kubectl get nodes -o wide` → Pick **node's internal IP**
 * Use: `http://<node-ip>:30080`
@@ -851,7 +718,7 @@ kubectl apply -f nodeport-service.yaml
 
 ---
 
-### 🔹 STEP 4: Expose with `LoadBalancer`
+#### STEP 4: Expose with `LoadBalancer`
 
 ```yaml
 # loadbalancer-service.yaml
@@ -887,14 +754,4 @@ http://<EXTERNAL-IP>
 
 ---
 
-## ✅ Summary Table
 
-| Service Type | Visibility           | Access Method                  |
-| ------------ | -------------------- | ------------------------------ |
-| ClusterIP    | Internal only        | `curl <service-name>` from pod |
-| NodePort     | Internal (AKS nodes) | `http://<node-ip>:<nodePort>`  |
-| LoadBalancer | External/Public      | `http://<external-ip>`         |
-
----
-
-Would you like me to generate a ZIP or GitHub repo of all YAML files? Or do you want to use your **own app's image** instead of `nginx`?
