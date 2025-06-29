@@ -1,3 +1,8 @@
+# *Week-6 {Assignment}*
+
+
+
+
 
 ------------------------------------------------------------------------------------------------------------------
 # **Deploy Replica Set and Replication Controller, and deployment. Also learn the advantages and disadvantages of each.**
