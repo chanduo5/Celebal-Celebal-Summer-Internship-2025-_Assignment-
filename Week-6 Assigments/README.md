@@ -1,6 +1,6 @@
 
 ------------------------------------------------------------------------------------------------------------------
-Deploy Replica Set and Replication Controller, and deployment. Also learn the advantages and disadvantages of each.
+# **Deploy Replica Set and Replication Controller, and deployment. Also learn the advantages and disadvantages of each.**
 ------------------------------------------------------------------------------------------------------------------
 
 
@@ -179,7 +179,7 @@ kubectl get service
 
 
 ------------------------------------------------------------
-Kubernetes service types (ClusterIP, NodePort, LoadBalancer)
+# **Kubernetes service types (ClusterIP, NodePort, LoadBalancer)**
 --------------------------------------------------------------
 
 ---
@@ -335,7 +335,7 @@ This IP is automatically provisioned by **Azure Standard Load Balancer**.
 
 
 --------------------------------------------------------------------------
-PersistentVolume (PV) and PersistentVolumeClaim (PVC)
+# **PersistentVolume (PV) and PersistentVolumeClaim (PVC)**
 -------------------------------------------------------------------------
 
 ---
@@ -533,7 +533,7 @@ kubectl apply -f pod.yaml
 
 
 -----------------------------------------------------------------------------------------------------------
-Managing Kubernetes with Azure Kubernetes Service (AKS), Creating and managing AKS clusters, Scaling and upgrading AKS clusters
+# **Managing Kubernetes with Azure Kubernetes Service (AKS), Creating and managing AKS clusters, Scaling and upgrading AKS clusters**
 -------------------------------------------------------------------------------------------------------------
 
 
@@ -675,7 +675,7 @@ az aks nodepool upgrade \
 
 
 -----------------------------------------------------------------------------------------
-Configure Taints and Tolerants.
+# **Configure Taints and Tolerants.**
 ---------------------------------------------------------------------------------------
 
 
@@ -788,7 +788,7 @@ kubectl apply -f pod-toleration.yaml
 
 
 --------------------------------------------------------------------------------------------
-Create and attach persistent volume claims to pods.
+# **Create and attach persistent volume claims to pods.**
 --------------------------------------------------------------------------------------------
 
 
@@ -925,7 +925,7 @@ Visit the `EXTERNAL-IP` in your browser and you’ll see the content.
 
 
 ------------------------------------------------------------------------------------------
-Configure health probes for pods.
+# **Configure health probes for pods.**
 -------------------------------------------------------------------------------
 
 
@@ -1073,7 +1073,7 @@ livenessProbe:
 
 
 ---------------------------------------------------------------------------------
-Configure autoscaling in your cluster (Horizontal scaling)
+# **Configure autoscaling in your cluster (Horizontal scaling)**
 ---------------------------------------------------------------------------------
 
 
