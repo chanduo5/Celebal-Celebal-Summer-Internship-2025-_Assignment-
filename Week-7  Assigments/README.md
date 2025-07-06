@@ -219,10 +219,8 @@ Log in as each user (e.g., Alice, Bob, Charlie) and confirm restrictions or chan
 
 
 ------------------------------------------------------
-Apply branch policies such that only the project administrator can access the master branch; contributors cannot.
+# **Apply branch policies such that only the project administrator can access the master branch; contributors cannot.**
 ----------------------------------------------------
-
-To apply **branch policies** where **only the project administrator can access the `master` branch** and **contributors cannot**, follow the steps based on your version control system. Below are detailed instructions for **Azure Repos (Azure DevOps)** and **GitHub**, the two most common platforms.
 
 ---
 
