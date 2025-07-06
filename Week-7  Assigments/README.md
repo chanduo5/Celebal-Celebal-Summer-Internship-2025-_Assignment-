@@ -351,7 +351,7 @@ Check these options:
 
 
 -------------------------------------------------
-## Azure DevOps – Apply Branch Security and Locks
+# **Azure DevOps – Apply Branch Security and Locks**
 -----------------------------------------------------
 
 ### Step 1: Open Azure DevOps Project
@@ -474,7 +474,7 @@ If the branch is obsolete and should be preserved:
 
 -------------------------------------------------------------
 
-### Azure DevOps – Branch and Path Filters (for Pipelines)
+# **Azure DevOps – Branch and Path Filters (for Pipelines)**
 
 -------------------------------------------------
 ### Use Case:
@@ -620,7 +620,7 @@ jobs:
 
 
 ------------------------------------------
-## Git + Azure DevOps: Create and Apply a Pull Request
+# **Git + Azure DevOps: Create and Apply a Pull Request**
 --------------------------------------------
 
 ### Prerequisites:
@@ -939,7 +939,7 @@ on:
 
 
 -------------------------------------------------------------
-##  Apply Gates in Azure DevOps (Classic Release Pipeline)
+#  **Apply Gates in Azure DevOps (Classic Release Pipeline)**
 -------------------------------------------------------------
 
 
