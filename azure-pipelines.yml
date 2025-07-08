@@ -1,0 +1,35 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+
+trigger:
+- main
+
+variables:
+  imageName: 'flaskapp'
+
+stages:
+- stage: Build
+  jobs:
+  - job: BuildAndPush
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureConnection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az acr login --name acichanduacr
+
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'AzureConnection'
+        repository: '$(imageName)'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: |
+          latest
