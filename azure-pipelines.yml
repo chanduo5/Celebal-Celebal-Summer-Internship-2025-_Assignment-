@@ -1,35 +1,65 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
-
 trigger:
 - main
 
 variables:
   imageName: 'flaskapp'
+  acrName: 'acichanduacr'                  # Your ACR name
+  acrLoginServer: 'acichanduacr.azurecr.io'
+  resourceGroup: 'aci-devops-rg'
+  containerName: 'flask-container'
+  location: 'eastus'
 
 stages:
-- stage: Build
+
+# ---------------------
+# CI Stage: Build + Push to ACR
+# ---------------------
+- stage: BuildAndPush
+  displayName: Build and Push Docker Image
   jobs:
   - job: BuildAndPush
+    displayName: Build & Push Image
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - task: AzureCLI@2
-      inputs:
-        azureSubscription: 'AzureConnection'
-        scriptType: 'bash'
-        scriptLocation: 'inlineScript'
-        inlineScript: |
-          az acr login --name acichanduacr
 
     - task: Docker@2
+      displayName: Build and Push to ACR
       inputs:
-        containerRegistry: 'AzureConnection'
+        containerRegistry: 'ACRConnection'         # Docker Registry service connection
         repository: '$(imageName)'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         tags: |
           latest
+
+# ---------------------
+# CD Stage: Deploy to Azure Container Instance
+# ---------------------
+- stage: Deploy
+  displayName: Deploy to ACI
+  dependsOn: BuildAndPush
+  jobs:
+  - job: DeployACI
+    displayName: Deploy to Azure Container Instance
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+
+    - task: AzureCLI@2
+      displayName: Deploy ACI with latest image
+      inputs:
+        azureSubscription: 'AzureConnection'        # Azure Resource Manager service connection
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az container create \
+            --resource-group $(resourceGroup) \
+            --name $(containerName) \
+            --image $(acrLoginServer)/$(imageName):latest \
+            --registry-login-server $(acrLoginServer) \
+            --registry-username $(ACR_USERNAME) \
+            --registry-password $(ACR_PASSWORD) \
+            --dns-name-label flaskaci$(Build.BuildId) \
+            --ports 80 \
+            --location $(location)
