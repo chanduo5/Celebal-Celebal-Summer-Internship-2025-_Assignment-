@@ -1,9 +1,11 @@
-
+----------------------
 # **Week- 8 Assignment**
+----------------------
 
-## *Configure dashboard and queries for work items.*
 
-### 🔷 Step 1: Navigate to Your Azure DevOps Project
+# *Configure dashboard and queries for work items.*
+
+###  Step 1: Navigate to Your Azure DevOps Project
 
 1. Go to [https://dev.azure.com/](https://dev.azure.com/).
 2. Sign in with your credentials.
@@ -11,7 +13,7 @@
 
 ---
 
-### 🔷 Step 2: Create a Work Item Query
+###  Step 2: Create a Work Item Query
 
 1. From the **left sidebar**, select **Boards → Queries**.
 2. Click **“New Query”** on the top.
@@ -27,7 +29,7 @@
 
 ---
 
-### 🔷 Step 3: Create or Edit a Dashboard
+###  Step 3: Create or Edit a Dashboard
 
 1. Go to **Dashboards** from the left panel.
 2. If you want to:
@@ -41,7 +43,7 @@
 
 ---
 
-### 🔷 Step 4: Add Widgets to Display Work Item Queries
+###  Step 4: Add Widgets to Display Work Item Queries
 
 1. On your dashboard, click **“Edit”** in the top right.
 2. Click **“Add a widget”**.
@@ -65,7 +67,7 @@
 
 ---
 
-### 🔷 Step 5: Share and Refresh the Dashboard
+###  Step 5: Share and Refresh the Dashboard
 
 * Dashboards are **auto-saved**.
 * To share:
