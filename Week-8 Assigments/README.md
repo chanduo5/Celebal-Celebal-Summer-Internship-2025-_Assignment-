@@ -1109,7 +1109,7 @@ Once you commit and run the pipeline:
 
 ---
 
-## ✅ Prerequisites
+##  Prerequisites
 
 Before you begin:
 
@@ -1123,7 +1123,7 @@ Before you begin:
 
 ---
 
-## ✅ Folder Structure Example
+##  Folder Structure Example
 
 ```
 /my-dotnet-app
@@ -1137,7 +1137,7 @@ Before you begin:
 
 ---
 
-## ✅ Step-by-Step Pipeline (`azure-pipelines.yml`)
+##  Step-by-Step Pipeline (`azure-pipelines.yml`)
 
 ```yaml
 trigger:
@@ -1205,7 +1205,7 @@ stages:
 
 ---
 
-## ✅ Setup in Azure DevOps
+##  Setup in Azure DevOps
 
 ### Step 1: Create Service Connection
 
@@ -1234,7 +1234,7 @@ stages:
 
 ---
 
-## ✅ Prerequisites
+##  Prerequisites
 
 1. A **React app** created with `create-react-app` or similar
 2. An **Azure Virtual Machine** (Linux or Windows) running and accessible via **SSH**
@@ -1244,7 +1244,7 @@ stages:
 
 ---
 
-## ✅ Folder Structure Example
+##  Folder Structure Example
 
 ```
 /my-react-app
@@ -1258,7 +1258,7 @@ stages:
 
 ---
 
-## ✅ Step 1: Configure the Azure VM
+##  Step 1: Configure the Azure VM
 
 On your Azure VM (Linux):
 
@@ -1272,7 +1272,7 @@ Ensure you have an SSH key pair. You’ll use the **private key** in the DevOps 
 
 ---
 
-## ✅ Step 2: Set Up SSH in Azure DevOps
+##  Step 2: Set Up SSH in Azure DevOps
 
 ### Create Pipeline Variables or Variable Group:
 
@@ -1287,7 +1287,7 @@ Ensure you have an SSH key pair. You’ll use the **private key** in the DevOps 
 
 ---
 
-## ✅ Step 3: Azure Pipeline YAML (`azure-pipelines.yml`)
+##  Step 3: Azure Pipeline YAML (`azure-pipelines.yml`)
 
 ```yaml
 trigger:
@@ -1355,7 +1355,7 @@ stages:
 
 ---
 
-## ✅ Step 4: Create SSH Service Connection
+##  Step 4: Create SSH Service Connection
 
 1. Go to **Project Settings → Service Connections**
 2. Click **New service connection → SSH**
@@ -1370,7 +1370,7 @@ stages:
 
 ---
 
-## ✅ Result
+##  Result
 
 * The React app is built using `npm run build`
 * The contents of the `build/` folder are securely copied to the Azure VM (e.g., `/var/www/html`)
@@ -1384,7 +1384,7 @@ http://<vm_public_ip>/
 
 ---
 
-## ✅ Optional Enhancements
+##  Optional Enhancements
 
 * Use **nginx.conf** for custom routing (`index.html` fallback)
 * Setup **domain + SSL (Let's Encrypt)** on VM
