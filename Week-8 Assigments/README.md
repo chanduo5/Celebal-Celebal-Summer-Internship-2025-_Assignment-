@@ -84,7 +84,7 @@
 -------
 # *Use Pipeline Variables While Configuring Pipelines in Azure DevOps*
 
----
+-------
 
 ## 1. Understanding Pipeline Variables
 
@@ -253,11 +253,10 @@ steps:
 ```
 
 
----
-
+----------------------------------------------------------------------------------
 # *Configure Azure Pipelines with Variable Groups, Task Groups, and Stage Scopes*
+------------------------------------------------------------------------------------
 
----
 
 ## 1. Create Variable Groups with Scoped Variables
 
